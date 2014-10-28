@@ -1,4 +1,4 @@
-require_relative '../lib/bike'
+require 'bike'
 
 describe Bike do
   it 'is NOT broken when created' do
