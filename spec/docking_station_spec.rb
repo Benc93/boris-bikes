@@ -5,6 +5,10 @@ describe 'docking station' do
   let(:bike) { Bike.new }
   let(:station) { DockingStation.new(:capacity => 20) }
 
+  def fill_station(station)
+    20.times { station.dock(Bike.new)}
+  end
+
   it "should accept a bike" do
     bike = Bike.new
     station = DockingStation.new
@@ -28,4 +32,8 @@ describe 'docking station' do
     expect(station).to be_full
   end
 
+  it "should not accept a bike if its full" do
+    fill_station station
+    expect(lambda {station.dock(bike)}).to raise_error(RuntimeError)
+  end
 end
