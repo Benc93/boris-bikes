@@ -1,4 +1,4 @@
-class Bike 
+iclass Bike 
 
   def initialize
     fix!

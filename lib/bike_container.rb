@@ -1,3 +1,9 @@
+class NoBikeError < Exception
+  def message
+    "No working bikes available"
+  end
+end
+
 module BikeContainer
   
   DEFAULT_CAPACITY = 10
@@ -24,14 +30,20 @@ module BikeContainer
     end
 
     def release(bike)
+      raise NoBikeError unless bikes.include?(bike)
       bikes.delete(bike)
     end
 
     def full?
-      bike_count == capacity
+      bike_count >= capacity
     end
 
     def available_bikes
+      broken_bike_count = bikes.count {|bike| bike.broken?}
       bikes.reject {|bike| bike.broken?}
+    end
+
+    def empty? 
+      bikes.count =< 0
     end
 end
